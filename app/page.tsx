@@ -11,11 +11,11 @@ async function HomePage() {
   const  experiencesCards = await getData ()
 
   return (
-    <>
+    <div className="pt-6">
     <h1 className="text-6xl font-bold mb-4">Experiencias</h1>
     <p className="mb-4 text-zinc-800">Aquí puedes ver todas las experiencias activas. Participa para ganar increíbles recompensas.</p>
     <Cards experiencesCards={experiencesCards} />
-    </>
+    </div>
   );
 }
 

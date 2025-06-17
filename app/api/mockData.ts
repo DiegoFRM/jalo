@@ -13,7 +13,7 @@ rewardType: 'raffle',
 rewardDescription: 'Win a premium camping set worth $500',
 status: 'active',
 startDate: '2025-04-01T00:00:00Z',
-endDate: '2025-05-15T23:59:59Z',
+endDate: '2025-07-15T23:59:59Z',
 missionCount: 5
 },
 {
@@ -27,7 +27,7 @@ rewardType: 'points',
 rewardDescription: 'Top 3 winners get premium fitness subscriptions',
 status: 'active',
 startDate: '2025-03-15T00:00:00Z',
-endDate: '2025-04-30T23:59:59Z',
+endDate: '2025-08-30T23:59:59Z',
 missionCount: 4
 },
 {

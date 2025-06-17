@@ -1,4 +1,6 @@
 import Link from "next/link";
+import CountdownTimer from "@/components/CountdownTimer";
+import MissionCards from "@/components/MissionCards"
 
 async function getData() {
   const res = await fetch("http://localhost:3000/api/experiences");
@@ -19,7 +21,6 @@ async function findExperience(params: any) {
   let findElement: Object = [];
   experiencesCards.map((exp: any, index: Number) => {
     if (exp.id == params) {
-      console.log(exp);
       findElement = exp;
     }
   });
@@ -27,10 +28,9 @@ async function findExperience(params: any) {
   return findElement;
 }
 
-
 async function findMissions(params: any) {
   const missionCards = await getDataMissions();
-  let findMission:any = [];
+  let findMission: any = [];
   missionCards.map((mission: any, index: Number) => {
     if (mission.experienceId == params) {
       findMission.push(mission);
@@ -45,7 +45,6 @@ async function Page({ params }: any) {
   const missionElement: any = await findMissions(params.id);
   let condition: string = "";
 
-  console.log(missionElement)
 
   switch (showElement.status) {
     case "active":
@@ -62,9 +61,11 @@ async function Page({ params }: any) {
       break;
   }
 
+  let saveData: any;
+
   return (
-    <div className="w-full md:w-2/3 mx-auto">
-      <div className="rounded-md bg-white p-4 flex flex-col lg:flex-row gap-4 w-full mx-auto">
+    <div className="w-full md:w-2/3 mx-auto ">
+      <div className="rounded-md bg-white p-4 flex flex-col lg:flex-row gap-4 w-full mx-auto mt-6">
         <div>
           <img
             className="lg:max-w-70 rounded rounded-tr-none rounded-br-none"
@@ -92,46 +93,19 @@ async function Page({ params }: any) {
             >
               {showElement.status}
             </p>
+            {showElement.status == "active" ? (
+              <div className="mt-3 mx-auto text-slate-500  border-slate-300 rounded-4xl w-40 p-1 text-center md:text-[10px]  flex justify-center items-center">
+                <CountdownTimer targetDate={showElement.endDate} />
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>
-      {
-       missionElement.length != 0 ?
-      <div className="rounded-md bg-white p-4 flex flex-col lg:flex-row gap-4 w-full mx-auto mt-10">
-        <div className="h-100 w-full m-2 p-4 rounded-md bg-blue-100 text-center">
-          <h3 className="font-bold text-2xl text-gray-600">Missions</h3>
-          <div className="mt-3 text-gray-500 text-left">
-            <ul>
-              
-            {
-              missionElement.map((mission:any) => (
-                <li className="mb-4">
-                  {mission.description}
-                  <p>
-                  <Link href={"/"} className="mt-1">
-                  
-                  <button 
-                  disabled={mission.status == "locked" ? true : false }
-                  className={`font-bold uppercase text-[12px] p-2 rounded mt-1  drop-shadow-lg ${mission.status == "locked" ? "bg-gray-200 " : "bg-green-200 "} `}>
-                    {mission.status == "locked" ? "Not available" : "Mission start"}
-                    </button>
-                  </Link>
-                  </p>
-                  </li>
-              ))
-
-            }
-            </ul>
-            </div>
-        </div>
-        <div className="h-100 w-full m-2 p-4 rounded-md bg-blue-100 text-center">
-          <h3 className="font-bold text-2xl text-gray-600">Rewards</h3>
-          <p className="mt-10 text-gray-500">{showElement.rewardDescription}</p>
-        </div>
-      </div>
-      :
-      <div></div>
-      }
+<MissionCards 
+missionElement={missionElement} />
+      
     </div>
   );
 }
