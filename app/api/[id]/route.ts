@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { missions} from "../mockData";
 
 export function GET(request:any,{params}:any){
-    const {searchParams} = new URL(request.url)
     let elem:any = undefined
     //console.log(searchParams.get("id"))
     console.log(missions.length)

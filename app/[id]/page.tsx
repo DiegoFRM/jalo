@@ -1,19 +1,23 @@
 import Link from "next/link";
 import CountdownTimer from "@/components/CountdownTimer";
 import MissionCards from "@/components/MissionCards"
+import {experiences,missions} from '@/app/api/mockData'
+
+const apiUrl = process.env.LOCAL_PATH;
+
 
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/experiences");
-  const data = await res.json();
+  const res = await fetch(apiUrl + "/api/experiences");
+  //const data = await res.json();
 
-  return data;
+  return experiences;
 }
 
 async function getDataMissions() {
-  const res = await fetch("http://localhost:3000/api/missions");
-  const data = await res.json();
+  const res = await fetch(apiUrl + "/api/missions");
+  //const data = await res.json();
 
-  return data;
+  return missions;
 }
 
 async function findExperience(params: any) {
@@ -64,7 +68,7 @@ async function Page({ params }: any) {
   let saveData: any;
 
   return (
-    <div className="w-full md:w-2/3 mx-auto ">
+    <div className="w-full xl:w-2/3 mx-auto ">
       <div className="rounded-md bg-white p-4 flex flex-col lg:flex-row gap-4 w-full mx-auto mt-6">
         <div>
           <img
@@ -73,15 +77,18 @@ async function Page({ params }: any) {
           />
         </div>
         <div className="w-full">
-          <div className="w-full flex flex-row gap-2 items-center">
+          <div className="w-full flex flex-row gap-2 items-center ">
             <div className="w-full flex flex-row gap-2 items-center mb-3">
               <img src={showElement.brandLogo} />
-              <span>Present:</span>
+              <div className="hidden md:block ml-2 w-40 mt-2">Present:</div>
             </div>
-            <div className="w-fit bg-white text-slate-600 dark:bg-black dark:text-slate-200 border border-slate-500 text-[10px] uppercase px-2.5 py-0.5 rounded">
+            <div className=" w-fit bg-white text-slate-600 dark:bg-black dark:text-slate-200 border border-slate-500 text-[10px] uppercase px-2.5 py-0.5 rounded">
               {showElement.rewardType}
             </div>
+
           </div>
+                      <span className="block md:hidden ml-2 w-100 md:w-40">Present:</span>
+
           <h3 className="font-bold text-3xl mb-3">{showElement.title}</h3>
           <p>{showElement.description}</p>
           <div className="flex flex-col lg:flex-row gap-4 w-full ">

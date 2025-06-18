@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import CountdownTimer from "@/components/CountdownTimer"
 
+
 function calcDays(date1: Date, date2: Date) {
   let purchaseDate: any = new Date(date1);
 
@@ -36,42 +37,45 @@ function Card({ experiencesCards }: any) {
 
 
   return (
-    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 rounded-md drop-shadow-xl">
+    <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 rounded-md drop-shadow-xl">
       {experiencesCards.map((expCard: any) => (
         <li
           key={expCard.id}
           className="bg-white mb-2 rounded-lg text-black m-2 transition delay-150 duration-300 ease-in-out hover:scale-102"
         >
-          <p
-                className={`uppercase mt-2 absolute top-0 text-white rounded w-40 p-1 text-center md:text-[10px] ${checkStatus(expCard.status)} flex justify-center items-center`}
-              >
-                {expCard.status}
-              </p>
           
           <img
             src={expCard.coverImage}
             className="object-contain max-w-full rounded-t-lg"
           />
 
-          <div className="p-10">
-             <div className="flex flex-row gap-4 w-full mb-4 ">
+          <div className="p-4">
+            
+             <div className="md:flex flex-row gap-2 w-full mb-4 justify-center items-center">
               
-              <p className="mt-3 bg-purple-700 text-white rounded w-40 p-1 text-center md:text-[10px] flex justify-center items-center">
+              <p
+                className={`uppercase mt-3  text-white rounded w-[100%] md:w-40 p-1 text-center md:text-[10px] ${checkStatus(expCard.status)} flex justify-center items-center`}
+              >
+                {expCard.status}
+              </p>
+              
+              <p className="mt-3 bg-purple-700 text-white rounded w-[100%] md:w-40 p-1 text-center md:text-[10px] flex justify-center items-center">
                 {expCard.missionCount} Missions
               </p>
-              <p className="mt-3 text-slate-500 border-3 border-slate-300 rounded w-40 p-1 text-center md:text-[10px]  flex justify-center items-center">
+              <p className="mt-3 text-slate-500 border-3 border-slate-300 rounded w-[100%] md:w-40 p-0.5 text-center md:text-[10px]  flex justify-center items-center">
                 {expCard.rewardType}
               </p>
             </div>
             
             <h1 className="font-bold mb-3">{expCard.title}</h1>
+            
             <p className="text-zinc-700 mb-10">{expCard.description}</p>
            
             <button
               onClick={() => router.push(`/${expCard.id}`)}
               type="button"
-              className="mt-3 cursor-pointer
- mx-auto text-slate-600 font-bold rounded w-70 p-1 text-center flex justify-center items-center bg-gradient-to-r from-lime-300 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-700 dark:focus:ring-lime-800"
+              className="mt-3 cursor-pointer w-[100%]
+ mx-auto text-slate-600 font-bold rounded p-1 text-center flex justify-center items-center bg-gradient-to-r from-lime-300 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-700 dark:focus:ring-lime-800"
             >
               More info
             </button>

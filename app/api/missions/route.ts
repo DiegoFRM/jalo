@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { missions} from "../mockData";
 
-export function GET(){
+export async function GET(){
     return NextResponse.json(missions)
 }
 
